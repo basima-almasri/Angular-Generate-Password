@@ -6,9 +6,16 @@
       <div class="field">
         <label>Length </label>
         <input
+          type="number"
           class="input"
           (input)="onChangeLength($any($event.target).value)"
         />
+        <div
+          class="notification is-danger is-light"
+          *ngIf="isPassLenghtValid()"
+        >
+          Password length must be between 8 and 20 characters.
+        </div>
       </div>
 
       <div class="field">
@@ -41,7 +48,7 @@
       <button
         [disabled]="
           !(
-            passwordLength &&
+            !isPassLenghtValid() &&
             (includeLetters || includeSymbols || includeNumbers)
           )
         "

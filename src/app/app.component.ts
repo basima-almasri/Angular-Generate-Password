@@ -12,9 +12,15 @@ export class AppComponent {
   includeNumbers = false;
   includeSymbols = false;
   password = '';
+  //passwordLength =10
 
   onChangeLength(value: string) {
-    const parseValue = parseInt(value);
+    // const updateValue=value ? value : '0'
+    // const updateValue=value.length ? value : '0'
+    //const updateValue=value.length >0 ? value : '0'
+    const updateValue = value || '0';
+    // const parseValue = parseInt(updateValue);
+    const parseValue = value ? parseInt(value) : 0;
     if (!isNaN(parseValue)) {
       this.passwordLength = parseValue;
     }
@@ -48,5 +54,11 @@ export class AppComponent {
       generatedPassword += valideChar[index];
     }
     this.password = generatedPassword;
+  }
+  isPassLenghtValid() {
+    return (
+      this.passwordLength &&
+      (this.passwordLength < 8 || this.passwordLength > 20)
+    );
   }
 }
